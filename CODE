@@ -1,6 +1,6 @@
 (in progress)
 
--- 1. Understand dataset 
+-- 1. Understand dataset: What is the top keywords in Google Trends and its percentage within dataset?
 
 WITH cte AS (
     SELECT 
