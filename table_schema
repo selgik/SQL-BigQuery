@@ -1,0 +1,48 @@
+SUMMARY: 
+1. Dataset: google_trends
+2. Link: https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/google-search-trends?project=capable-blend-330013
+3. Description: This dataset includes the Top 25 stories and Top 25 Rising queries from Google Trends. 
+   It will be made available as two separate BigQuery tables, with a set of new top terms appended daily. 
+   Each set of Top 25 and Top 25 rising expires after 30 days, and will be accompanied by a rolling five-year window of historical data 
+   in 210 distinct locations in the United States.
+   
+   
+Table1: top_terms
+bigquery-public-data:google_trends.top_terms
+-------------------------------------------------------------------------------------
+FIELD NAME          TYPE            MODE            DESCRIPTION
+dma_name            string          nullable        - stores the full text name of the Designated Market Area (DMA) 
+dma_id              integer         nullable        - 3 digit numerical ID used to identify a DMA
+term                string          nullable        - the human readable identifier for a term, i.e. “Acme Inc”    
+week                date            nullable        - first day of the week for the current row’s position in the time series 
+                                                      for combination of term, DMA, and score    
+score               integer         nullable        - index from 0-100 that denotes how popular this term was for a DMA during the current date, 
+                                                      relative to the other dates in the same time series for this term (260 weeks = 52 weeks * 5 years)  
+rank                integer         nullable        - numeric representation of where the term falls in comparison to the other top terms 
+                                                      for the day across the US market (e.g. rank of 1-25). 
+                                                      Note: the rank value shows the same across all historical data and DMA   
+refresh_date        date            nullable        - date when the new set of term, score, and DMA combination was added. 
+                                                      Note, this column also serves as the partition key    
+
+
+Table2: top_rising_terms
+bigquery-public-data.google_trends.top_rising_terms
+-------------------------------------------------------------------------------------
+FIELD NAME          TYPE            MODE            DESCRIPTION
+dma_id              integer         nullable        - 3 digit numerical ID used to identify a DMA
+term                string          nullable        - the human readable identifier for a term, i.e. “Acme Inc”
+week                date            nullable        - first day of the week for the current row’s position in the time series 
+                                                      for combination of term, DMA, and score
+score               integer         nullable        - index from 0-100 that denotes how popular this term was for a DMA 
+                                                      during the current date, relative to the other dates in the same time series 
+                                                      for this term (260 weeks = 52 weeks * 5 years)
+rank                integer         nullable        - numeric representation of where the term falls in comparison to the other
+                                                      top terms for the day across the US market (e.g. rank of 1-25). 
+                                                      Note, the rank value shows the same across all historical data and DMA. 
+percent_gain        integer         nullable        - percentage gain (rate) at which term rose compared to previous date period 
+refresh_date        date            nullable        - date when the new set of term, score, and DMA combination was added. 
+                                                    - Note, this column also serves as the partition key 
+dma_name            string          nullable        - stores the full text name of the DMA
+
+
+- THE END -
