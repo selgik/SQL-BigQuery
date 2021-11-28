@@ -1,0 +1,77 @@
+-- UNDERSTAND THE DATASET
+-- Question 1: Get summary of data
+SELECT 
+    unique_key, 
+    created_date,
+    closed_date,
+    agency,
+    agency_name,
+    complaint_type,
+    location_type,
+    incident_address,
+    address_type,
+    city,
+    status,
+    resolution_description
+FROM bigquery-public-data.new_york_311.311_service_requests
+LIMIT 10 
+
+
+-- Question 2: Check completeness of data
+-- Finding: There are 2283 cases where status is "Closed" but no closed_date is provided.
+SELECT closed_date, status
+FROM bigquery-public-data.new_york_311.311_service_requests
+WHERE status = "Closed" 
+  AND closed_date IS NULL
+
+
+-- Question 3: How many status type are there? 
+-- Finding: There are 13 types. Status types to be considered when visualiziaing dataset are: Cancel/Cancelled, Closed, Rest.
+SELECT DISTINCT status
+FROM bigquery-public-data.new_york_311.311_service_requests
+
+
+-- Question 4: What is the percentage of each status?
+-- Finding: Around 96% of cases are closed. 
+WITH temp AS (
+    SELECT 
+        status, 
+        COUNT(status) AS counts,
+        (SELECT COUNT(*) FROM bigquery-public-data.new_york_311.311_service_requests) AS total_counts
+    FROM 
+        bigquery-public-data.new_york_311.311_service_requests
+    GROUP BY
+        status
+    )
+
+SELECT 
+    status,
+    ROUND ((counts/total_counts)*100,2) AS percentage_total
+FROM
+    temp
+ORDER BY 
+    percentage_total DESC
+
+
+-- Question 5: Ensure that all cases are assigned with its status
+-- Finding: no null value found under status column.
+SELECT status 
+FROM bigquery-public-data.new_york_311.311_service_requests
+WHERE status IS NULL
+
+
+-- Question 6: What are the top complaints? 
+-- Finding: Noise-residential > heat/hot water > illegal parking
+SELECT complaint_type, COUNT(complaint_type) AS counts
+FROM bigquery-public-data.new_york_311.311_service_requests
+GROUP BY complaint_type
+ORDER BY counts DESC
+
+
+-- Question 7: Who are the top agency handling the requests?
+-- Finding: New York City Police Department > Department of Housing Preservation and Development > Department of Transportation
+SELECT agency_name, COUNT(agency_name) AS counts
+FROM bigquery-public-data.new_york_311.311_service_requests
+GROUP BY agency_name
+ORDER BY counts DESC
+
