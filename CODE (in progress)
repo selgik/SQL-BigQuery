@@ -66,7 +66,6 @@ WHERE week = "2021-11-21" AND dma_name = "Columbus OH"
 ORDER BY score DESC,  term ASC 
 LIMIT 100
 
-
 -- (2) top_rising_terms table
 SELECT *
 FROM bigquery-public-data.google_trends.top_rising_terms
