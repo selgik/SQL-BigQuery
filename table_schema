@@ -1,6 +1,6 @@
       
 Table1: top_terms
-bigquery-public-data:google_trends.top_terms
+bigquery-public-data.google_trends.top_terms
 -------------------------------------------------------------------------------------
 FIELD NAME          TYPE            MODE            DESCRIPTION
 dma_name            string          nullable        - stores the full text name of the Designated Market Area (DMA) 
