@@ -4,7 +4,7 @@
 bigquery-public-data.new_york_311.311_service_requests
 -------------------------------------------------------------------------------------
 FIELD NAME                TYPE            MODE            DESCRIPTION
-unique_key                integer         nullable
+unique_key                integer         nullable        
 created_date              timestamp       nullable
 closed_date               timestamp       nullable
 agency                    string          nullable  
@@ -16,3 +16,5 @@ address_type              string          nullable
 city                      string          nullable      
 status                    string          nullable     
 resolution_description    string          nullable      
+
+- END
