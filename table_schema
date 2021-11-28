@@ -33,7 +33,7 @@ rank                integer         nullable        - numeric representation of 
                                                       Note, the rank value shows the same across all historical data and DMA. 
 percent_gain        integer         nullable        - percentage gain (rate) at which term rose compared to previous date period 
 refresh_date        date            nullable        - date when the new set of term, score, and DMA combination was added. 
-                                                    - Note, this column also serves as the partition key 
+                                                      Note, this column also serves as the partition key 
 dma_name            string          nullable        - stores the full text name of the DMA
 
 
