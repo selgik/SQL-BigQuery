@@ -1,4 +1,4 @@
--- To visualize data in Tableau, I used the last 5 years data
+-- To visualize data in Tableau, I used below table containing the requests for the last 5 years.
 
 SELECT
     created_date,
