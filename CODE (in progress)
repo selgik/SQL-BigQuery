@@ -1,0 +1,59 @@
+-- 1. Understand the dataset: what is the score? what are the recent hot keywords?
+-- (1) check the top keywords first
+
+SELECT *
+FROM bigquery-public-data.google_trends.top_terms
+WHERE week = "2021-11-21" 
+ORDER BY score DESC 
+
+
+-- (2) check the lowest score for the keyword
+
+SELECT *
+FROM bigquery-public-data.google_trends.top_terms
+WHERE week = "2021-11-21" -- found there are NULL values
+      and score IS NOT NULL
+ORDER BY score ASC
+
+
+-- 2. Understand the dataset: What is the top keywords in Google Trends and its percentage within dataset?
+
+WITH cte AS (
+    SELECT 
+      term, 
+      COUNT(term) as count_term,
+      (SELECT COUNT(term) FROM bigquery-public-data.google_trends.top_terms) AS count_total
+    FROM 
+      bigquery-public-data.google_trends.top_terms
+    GROUP BY
+      term 
+    ORDER BY
+      count_term desc
+    )  
+
+SELECT 
+    term, 
+    count_term, 
+    count_total,
+    ROUND (count_term/count_total*100, 2) AS percentage_pie
+FROM 
+    cte
+
+
+-- 3. Understand the dataset: What is the difference between terms and rising terms? Compare the results.
+-- (1) top_terms table
+
+SELECT *
+FROM bigquery-public-data.google_trends.top_terms
+WHERE week = "2021-11-21" AND dma_name = "Columbus OH"
+ORDER BY score DESC,  term ASC 
+LIMIT 100
+
+
+-- (2) top_rising_terms table
+SELECT *
+FROM bigquery-public-data.google_trends.top_rising_terms
+WHERE week = "2021-11-21" AND dma_name = "Columbus OH"
+ORDER BY score DESC, term ASC
+LIMIT 100
+
