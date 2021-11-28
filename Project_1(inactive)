@@ -99,7 +99,6 @@ ORDER BY score ASC
 
 -- Question 3: What is the measured time frame?
 -- Finding: first week is 2016-10-30 and the last week is 2021-11-21
-
 -- (1) top_terms table
 
 SELECT max(week), min(week)
@@ -111,9 +110,8 @@ SELECT max(week), min(week)
 FROM bigquery-public-data.google_trends.top_rising_terms
 
 
--- 4. Understand the dataset: What is the difference between terms and rising terms? Compare the results.
---> Finding: Some keywords tend to appear in both tables. 
-
+-- Questsion 4: What is the difference between terms and rising terms? Compare the results.
+-- Finding: Some keywords tend to appear in both tables. 
 -- (1) top_terms table
 
 SELECT *
@@ -130,8 +128,8 @@ ORDER BY score DESC, term ASC
 LIMIT 100
 
 
--- 5. Ask question: What are the top keyword appearing in both top_terms and top_rising_terms?
---> Finding: only 1 result. "49ers" with counts 54,600. Why? I noticed few keywords appearing in both tables via Exercise 4? Maybe BigQuery is case senstive?
+-- Question 5: What are the top keyword appearing in both top_terms and top_rising_terms?
+-- Finding: only 1 result. "49ers" with counts 54,600. But why? I noticed few keywords appearing in both tables in Q4? Maybe BigQuery is case senstive?
 
 SELECT terms.term, COUNT(terms.term) AS counts
 FROM bigquery-public-data.google_trends.top_terms AS terms
@@ -145,8 +143,8 @@ GROUP BY terms.term
 ORDER BY counts DESC 
 
 
--- 6. Aks question: Re-run the query by ignoring case sensitivity 
--- Finding: term column on top_terms table has capital letters. I used LOWER function to match column. Now I see 94 results with top keyword "Kyle Rittenhouse" with counts 383,460.
+-- Qeustion 6: Re-run the query by ignoring case sensitivity 
+-- Finding: term column on top_terms table has capital letters. I used LOWER function to match column. Now 94 results appear with top keyword "Kyle Rittenhouse" with counts 383,460.
 
 SELECT terms.term, COUNT(terms.term) as counts 
 FROM bigquery-public-data.google_trends.top_terms AS terms
@@ -161,13 +159,10 @@ ORDER BY counts DESC
 
 
 
--- PART2: WORKING IN TABLEAU AND BIGQUERY
--- [2] VERIFY DATA
--- Question: In Tableau, I inner joint top_terms with top_rising_terms. I got top keyword as "Kyle Rittenhouse" with counts# 1,526,280. WHY?
--- Verification: In BigQuery, I tried to answer this question. Where did 1,526,280 come from? 
--- Finding: Results from below query are 383,460 | 218,820 | 602,280
+-- PART2: VERIFY DATA (COMPARE DATA IN TABLEAU VS BIGQUERY)
+-- Question 7: In Tableau, I inner joint top_terms with top_rising_terms. I got top keyword as "Kyle Rittenhouse" with counts# 1,526,280. WHY?
+-- Finding: Results from BigQuery on below queries are 383,460 | 218,820 | 602,280
 -- Follow up: In Tableau, I union-ed instead of join. Then I got top keyword as "Kyle Rittenhouse" with counts# 602,280.
--- Question2: Why does "Kyle Rittenhouse" keyword appear in year 2016? What am I missing?
 
 WITH cte AS (
     SELECT 
@@ -181,3 +176,8 @@ WITH cte AS (
 
 SELECT counts1, counts2, counts1+counts2
 FROM cte
+
+-- Question 8: Why does "Kyle Rittenhouse" keyword appear in week of 2016? What am I missing?
+-- Finding: Still pending. According to research, incidence of "Kyle Rittenhouse" happend in 2020. It looks like I am misunderstanding the 'week' column.
+-- PROJECT ON HOLD.
+
