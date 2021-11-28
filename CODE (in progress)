@@ -113,6 +113,7 @@ ORDER BY counts DESC
 -- Verification: In BigQuery, I tried to answer this question. Where did 1,526,280 come from? 
 -- Finding: Results from below query are 383,460 | 218,820 | 602,280
 -- Follow up: In Tableau, I union-ed instead of join. Then I got top keyword as "Kyle Rittenhouse" with counts# 602,280.
+-- Question2: Why does "Kyle Rittenhouse" keyword appear in year 2016? What am I missing?
 
 WITH cte AS (
     SELECT 
