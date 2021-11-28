@@ -1,6 +1,6 @@
 # SQL-project
 ## CODE LIST:
-    TBA
+    SELECT, LIMIT, WHERE, NULL, DISTINCT, WITH AS, GROUP BY, ORDER BY, ROUND, EXTRACAT 
 ## Additional Document:
     table_schema
 ## Others:
