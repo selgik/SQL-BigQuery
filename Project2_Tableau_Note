@@ -1,0 +1,28 @@
+1. Situation
+  Example: 
+  - I have supermarket sales over time chart. I want to analyze top 10 sales products out of 200. 
+  - Instead of having 10 charts under each per product category, I want to use filter so that I can see one sales chart each time.
+  
+2. Problem
+  I try to use Top N item as filter, but filter card shows me the whole list of products.
+  - Problem A. I cannot use Top N filter, as filter card will show the whole list of items. 
+  - Problem B. I cannot use grouped list for filter. 
+  - Problem C. Creating custom list takes time as I need to search and add manaully.
+
+3. Solution
+  Use parameter and apply [parameter] = [dimension] in filter.
+  - Step 1. Group Top 10 products vs rest products. This will speed up Step 2.
+  - Step 2. Create parameter using string and adding values from Step 1's Group. 
+  - Step 3. Add products dimension as filter and go to condition > by formula > [parameter] = [products]
+  - Step 4. Show parameter control panel. 
+  
+4. Tip
+  When I used parameter control, one of sales chart showed blank result.
+  - Reason: I used copied worksheet where one of product name was alised. 
+  - Solution: I edited Group from 3-Step 1 by removing inner-group of product name. 
+  
+5. Credit
+  - Filtering with parameters by Ross Perez:
+    https://www.tableau.com/about/blog/2012/7/filtering-parameters-18326
+    
+- THE END -
