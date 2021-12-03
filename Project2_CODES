@@ -86,4 +86,26 @@ GROUP BY year
 ORDER BY counts desc
 
 
+-- Question 9: Calculate average time required for request to be closed. Verify results.
+-- Finding: Results between Tableau and BigQuery are similar except for HPD. (Why huge difference for HPD?)
+-- (1) Calculated field from Tableau
+DATEDIFF('day',[Created Date],[Closed Date])
+
+-- (2) Verification in BigQuery
+WITH temp AS (
+    SELECT 
+        timestamp_diff(closed_date,created_date,day) AS tiemdiff
+    FROM 
+        `capable-blend-330013.new_york_311.5years` 
+    WHERE agency="HPD" 
+      AND closed_date IS NOT NULL
+    GROUP BY closed_date, created_date
+    )
+
+ SELECT 
+    SUM(tiemdiff)/
+    (SELECT COUNT(*) FROM capable-blend-330013.new_york_311.5years WHERE agency="HPD" AND closed_date IS NOT NULL)
+    FROM temp
+
+
 -- END
