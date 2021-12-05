@@ -2,27 +2,26 @@
 TABLEAU NOTE: TRACK ISSUES AND SOLUTION
 
 1. Situation
-  Example: 
-  - I have supermarket sales over time chart. I want to analyze top 10 sales products out of 200. 
-  - Instead of having 10 charts under each per product category, I want to use filter so that I can see one sales chart each time.
+  - I want to analyze top 10 complaints type out of 431. 
+  - Instead of having 10 charts for each rank, I want to use filter so that I can see one rank chart each time.
   
 2. Problem
-  I try to use Top N item as filter, but filter card shows me the whole list of products.
-  - Problem A. I cannot use Top N filter, as filter card will show the whole list of items. 
-  - Problem B. I cannot use grouped list for filter. 
+  I try to use Top N item as filter, but filter card shows me the whole list of complaint type.
+  - Problem A. I cannot use Top N filter, as filter card will show the entire list. 
+  - Problem B. I cannot use grouped list for filter either. 
   - Problem C. Creating custom list takes time as I need to search and add manaully.
 
 3. Solution
   Use parameter and apply [parameter] = [dimension] in filter.
-  - Step 1. Group Top 10 products vs rest products. This will speed up Step 2.
+  - Step 1. Group Top 10 complaint type vs rest types. This will speed up Step 2.
   - Step 2. Create parameter using string and adding values from Step 1's Group. 
-  - Step 3. Add products dimension as filter and go to condition > by formula > [parameter] = [products]
+  - Step 3. Add [complaint type] dimension as filter and edit fiter by going to condition > by formula > [parameter] = [complaint type]
   - Step 4. Show parameter control panel. 
   
 4. Tip
-  When I used parameter control, one of sales chart showed blank result.
-  - Reason: I used copied worksheet where one of product name was alised. 
-  - Solution: I edited Group from 3-Step 1 by removing inner-group of product name. 
+  When I used parameter control, one of chart showed blank result.
+  - Reason: I used copied worksheet where one of product name was alised previously. 
+  - Solution: I edited Group from 3. Solution - Step 1 by removing inner-group of complaint type name. 
   
 5. Credit
   - Filtering with parameters by Ross Perez:
