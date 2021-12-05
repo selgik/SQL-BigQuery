@@ -1,6 +1,6 @@
 # I have omitted columns which are not in use for this project.
 
-1. Source data
+1. Source table
 
 SELECT
     created_date,
@@ -35,4 +35,4 @@ city                      string          nullable
 status                    string          nullable     
 resolution_description    string          nullable      
 
-- END
+- THE END -
