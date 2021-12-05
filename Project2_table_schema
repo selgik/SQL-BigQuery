@@ -1,5 +1,23 @@
+# I have omitted columns which are not in use for this project.
 
-# omitted columns which are not in use for this project.
+1. Source data
+
+SELECT
+    created_date,
+    closed_date,
+    agency,
+    agency_name,
+    complaint_type,
+    descriptor,
+    street_name,
+    address_type,
+    city,
+    status,
+    resolution_description
+FROM bigquery-public-data.new_york_311.311_service_requests
+WHERE created_date > "2016-11-28"
+
+2. Table schema
 
 bigquery-public-data.new_york_311.311_service_requests
 -------------------------------------------------------------------------------------
