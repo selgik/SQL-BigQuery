@@ -3,6 +3,7 @@
     SELECT, LIMIT, NULL, DISTINCT, WHERE, WITH AS, GROUP BY, ORDER BY, ROUND, EXTRACAT 
 ## Additional Document:
     table_schema
+    Tableau_note
 ## Others:
     - Dataset: google_trends
     - Link: https://console.cloud.google.com/marketplace/product/city-of-new-york/nyc-311?project=capable-blend-330013
